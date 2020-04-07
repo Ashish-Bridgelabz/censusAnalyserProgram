@@ -15,10 +15,9 @@ import java.util.Iterator;
 
 public class StateCensusAnalyser {
     int countRecord = 0;
-    ;
 
     //Reading and printing the data csv file
-    public int loadCensusCSVData(String getPaths) throws  IOException {
+    public int loadCensusCSVData(String getPaths) throws IOException, StateCensusAnalyserException {
         try (
                 Reader reader = Files.newBufferedReader(Paths.get(getPaths));
                 CSVReader csvReader = new CSVReader(reader);
@@ -29,6 +28,7 @@ public class StateCensusAnalyser {
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
             Iterator<CSVStateCensus> csvStateCensusIterator = csvToBean.iterator();
+
             while (csvStateCensusIterator.hasNext()) {
                 CSVStateCensus csvStateCensus = csvStateCensusIterator.next();
                 System.out.println("State : " + csvStateCensus.State);
@@ -39,7 +39,10 @@ public class StateCensusAnalyser {
                 System.out.println(countRecord);
             }
 
-            return countRecord;
+        } catch (IOException e) {
+            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE, e.getMessage());
         }
+        return countRecord;
     }
 }
+
