@@ -43,19 +43,18 @@ public class StateCensusAnalyser {
             throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE, e.getMessage());
 
         } catch (RuntimeException e) {
-            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTERED_INCORRECT_DELIMITER, e.getMessage());
+            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTERED_INCORRECT_DELIMITER_OR_HEADER, e.getMessage());
         }
         return countRecord;
     }
-
-    public static void getFileExtension(File getPaths) throws StateCensusAnalyserException {
+        public static void getFileExtension(File getPaths) throws StateCensusAnalyserException {
         String fileName = getPaths.getName();
         String extension = null;
         if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
             extension = fileName.substring(fileName.lastIndexOf(".") + 1);
         }
         if (!(extension.equals("csv"))) {
-            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTER_WRONG_FILE_TYPE, "FILE TYPE IS INCORRECT");
+            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTER_WRONG_FILE_TYPE,"FILE TYPE IS INCORRECT,STATE_CSVHEADER_INCORRECT_PATH");
         }
     }
 }
