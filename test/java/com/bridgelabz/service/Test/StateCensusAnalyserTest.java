@@ -6,11 +6,13 @@ import org.junit.Assert;
 import org.junit.Test;
 
 //import java.io.File;
+import java.io.File;
 import java.io.IOException;
 
 public class StateCensusAnalyserTest {
     String STATE_CSV_FILE_PATH = "/home/ashish/IdeaProjects/IndianCensusAnalyser/src/test/resources/IndiaStateCensusData.csv";
     String STATE_CSV_WRONG_FILE_PATH = "/home/ashish/IdeaProjects/IndianCensusAnalyser/src/tested/resources/IndiaStateCensusData.csv";
+    String STATE_CSV_WRONG_FILE_TYPE_PATH = "/home/ashish/IdeaProjects/IndianCensusAnalyser/src/test/resources/IndiaStateCensusData.txt";
     StateCensusAnalyser stateCensusAnalyser = new StateCensusAnalyser();
 
     @Test
@@ -20,14 +22,23 @@ public class StateCensusAnalyserTest {
     }
     @Test
     public void givenStateCensusCsvFile_WhenIncorrect_ShouldReturnCustomException() throws IOException {
-        STATE_CSV_FILE_PATH = "./src/tested/resources/StateCensusData.csv";
-        stateCensusAnalyser = new StateCensusAnalyser();
         try {
-            stateCensusAnalyser.loadCensusCSVData(STATE_CSV_FILE_PATH);
+            stateCensusAnalyser.loadCensusCSVData(STATE_CSV_WRONG_FILE_PATH );
 
         } catch (StateCensusAnalyserException e) {
             Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE, e.type);
         }
+
     }
+    @Test
+    public void givenStateCensusCSVFile_WhenTypeIncorrect_ShouldReturnCustomException() {
+        stateCensusAnalyser = new StateCensusAnalyser();
+        try {
+            StateCensusAnalyser.getFileExtension(new File(STATE_CSV_WRONG_FILE_TYPE_PATH));
+        } catch (StateCensusAnalyserException e) {
+            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTER_WRONG_FILE_TYPE, e.type);
+        }
+    }
+
 
 }
