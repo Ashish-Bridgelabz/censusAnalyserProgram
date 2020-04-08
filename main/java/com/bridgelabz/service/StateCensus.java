@@ -38,9 +38,12 @@ public class StateCensus {
             }
         } catch (IOException e) {
             throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE, e.getMessage());
+        } catch (RuntimeException e) {
+            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTER_WRONG_FILE_TYPE, e.getMessage());
         }
-        return countRecord;
+            return countRecord;
+        }
     }
-}
+
 
 
