@@ -17,7 +17,7 @@ import java.util.logging.LogRecord;
 public class StateCensus {
     int countRecord = 0;
 
-    public int loadCensusCodeCSVData(String getPaths) throws IOException, StateCensusAnalyserException {
+    public int loadCensusCodeCSVData(String getPaths) throws StateCensusAnalyserException {
         try (
                 Reader reader = Files.newBufferedReader(Paths.get(getPaths));
                 CSVReader csvReader = new CSVReader(reader);
@@ -39,11 +39,19 @@ public class StateCensus {
         } catch (IOException e) {
             throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE, e.getMessage());
         } catch (RuntimeException e) {
-            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTER_WRONG_FILE_TYPE, e.getMessage());
+            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTERED_INCORRECT_DELIMITER_OR_HEADER, e.getMessage());
         }
-            return countRecord;
-        }
+        return countRecord;
     }
 
-
-
+    public static void getFileExtension(File getPaths) throws StateCensusAnalyserException {
+        String fileName = getPaths.getName();
+        String extension = null;
+        if (fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0) {
+            extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        }
+        if (!(extension.equals("csv"))) {
+            throw new StateCensusAnalyserException(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE_TYPE, "File type is incorrect");
+        }
+    }
+}
