@@ -1,5 +1,6 @@
 package com.bridgelabz.service.Test;
 
+import com.bridgelabz.exception.CSVBuilderException;
 import com.bridgelabz.exception.StateCensusAnalyserException;
 import com.bridgelabz.service.StateCensus;
 import com.bridgelabz.service.StateCensusAnalyser;
@@ -24,14 +25,14 @@ public class StateCensusAnalyserTest {
     String INCORRECT_IN_HEADER_CSV_STATE_CODE_PATH = "/home/ashish/IdeaProjects/IndianCensusAnalyser/src/test/resources/IndiaStateCode2.csv";
 
     @Test
-    public void givenStateCensusCSVFile_WhenTrue_NumberOfRecordShouldMatch() throws StateCensusAnalyserException {
+    public void givenStateCensusCSVFile_WhenTrue_NumberOfRecordShouldMatch() throws StateCensusAnalyserException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         int countRecord = stateCensusAnalyser.loadCensusCsvData(STATE_CSV_FILE_PATH);
         Assert.assertEquals(countRecord, 29);
     }
 
     @Test
-    public void givenStateCensusCsvFile_WhenIncorrect_ShouldReturnCustomException() throws IOException {
+    public void givenStateCensusCsvFile_WhenIncorrect_ShouldReturnCustomException() throws IOException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadCensusCsvData(STATE_CSV_WRONG_FILE_PATH);
@@ -51,7 +52,7 @@ public class StateCensusAnalyserTest {
     }
 
     @Test
-    public void givenStateCensusCSVFileCorrect_WhenDelimiterIncorrect_ShouldReturnCustomException() throws IOException {
+    public void givenStateCensusCSVFileCorrect_WhenDelimiterIncorrect_ShouldReturnCustomException() throws IOException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadCensusCsvData(STATE_CSVFILE_DELIMITERINCORRECT_PATH);
@@ -61,7 +62,7 @@ public class StateCensusAnalyserTest {
     }
 
     @Test
-    public void givenStateCensusCSVFile_WhenCorrectButCsvHeaderIncorrect_ShouldReturnCustomException() throws IOException {
+    public void givenStateCensusCSVFile_WhenCorrectButCsvHeaderIncorrect_ShouldReturnCustomException() throws IOException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadCensusCsvData(STATE_CSVHEADER_INCORRECT_PATH);
@@ -71,14 +72,14 @@ public class StateCensusAnalyserTest {
     }
 
     @Test
-    public void givenStateCensusCode_WhenTrue_NumberOfRecordShouldBeMatch() throws IOException, StateCensusAnalyserException {
+    public void givenStateCensusCode_WhenTrue_NumberOfRecordShouldBeMatch() throws IOException, StateCensusAnalyserException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         int countRecord = stateCensusAnalyser.loadSateCodeCsvData(CSV_STATE_CODE_PATH);
         Assert.assertEquals(countRecord, 37);
     }
 
     @Test
-    public void givenStateCodeCsvFile_WhenIncorrect_ShouldReturnCustomException() throws IOException {
+    public void givenStateCodeCsvFile_WhenIncorrect_ShouldReturnCustomException() throws IOException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadSateCodeCsvData(INCORRECT_CSV_STATE_CODE_PATH);
@@ -99,7 +100,7 @@ public class StateCensusAnalyserTest {
 
 
     @Test
-    public void givenStateCensusCodeCSVFileCorrect_WhenDelimiterIncorrect_ShouldReturnCustomException() throws IOException {
+    public void givenStateCensusCodeCSVFileCorrect_WhenDelimiterIncorrect_ShouldReturnCustomException() throws IOException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadSateCodeCsvData(INCORRECT_IN_DELIMITER_CSV_STATE_CODE_PATH);
@@ -109,7 +110,7 @@ public class StateCensusAnalyserTest {
     }
 
     @Test
-    public void givenStateCensusCodeCSVFile_WhenHeaderIncorrect_ShouldReturnCustomException() throws IOException {
+    public void givenStateCensusCodeCSVFile_WhenHeaderIncorrect_ShouldReturnCustomException() throws IOException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadSateCodeCsvData(INCORRECT_IN_HEADER_CSV_STATE_CODE_PATH);
