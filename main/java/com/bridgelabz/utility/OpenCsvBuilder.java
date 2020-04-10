@@ -19,11 +19,12 @@ public class OpenCsvBuilder {
             return censusCSVIterator;
         } catch (IllegalStateException e) {
             throw new StateCensusAnalyserException
-                    (StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE, e.getMessage());
+                    (StateCensusAnalyserException.Exceptiontype.ILLEGAL_STATE, e.getMessage());
         }
 
     }
 }
+
 
 
 
