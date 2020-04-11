@@ -2,7 +2,6 @@ package com.bridgelabz.service.Test;
 
 import com.bridgelabz.exception.CSVBuilderException;
 import com.bridgelabz.exception.StateCensusAnalyserException;
-import com.bridgelabz.service.StateCensus;
 import com.bridgelabz.service.StateCensusAnalyser;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,8 +35,8 @@ public class StateCensusAnalyserTest {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadCensusCsvData(STATE_CSV_WRONG_FILE_PATH);
-        } catch (StateCensusAnalyserException e) {
-            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE, e.type);
+        } catch (CSVBuilderException e) {
+            Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_WRONG_FILE, e.type);
         }
     }
 
@@ -46,8 +45,8 @@ public class StateCensusAnalyserTest {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             StateCensusAnalyser.getFileExtension(new File(STATE_CSV_WRONG_FILE_TYPE_PATH));
-        } catch (StateCensusAnalyserException e) {
-            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE_TYPE, e.type);
+        } catch ( CSVBuilderException e) {
+            Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_WRONG_FILE_TYPE, e.type);
         }
     }
 
@@ -56,8 +55,8 @@ public class StateCensusAnalyserTest {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadCensusCsvData(STATE_CSVFILE_DELIMITERINCORRECT_PATH);
-        } catch (StateCensusAnalyserException e) {
-            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_INCORRECT_DELIMITER_OR_HEADER, e.type);
+        } catch (CSVBuilderException e) {
+            Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_INCORRECT_DELIMITER_OR_HEADER, e.type);
         }
     }
 
@@ -66,8 +65,8 @@ public class StateCensusAnalyserTest {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadCensusCsvData(STATE_CSVHEADER_INCORRECT_PATH);
-        } catch (StateCensusAnalyserException e) {
-            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_INCORRECT_DELIMITER, e.type);
+        } catch (CSVBuilderException e) {
+            Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_INCORRECT_DELIMITER, e.type);
         }
     }
 
@@ -83,29 +82,28 @@ public class StateCensusAnalyserTest {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadSateCodeCsvData(INCORRECT_CSV_STATE_CODE_PATH);
-        } catch (StateCensusAnalyserException e) {
-            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE, e.type);
+        } catch (CSVBuilderException e) {
+            Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_WRONG_FILE, e.type);
         }
     }
 
     @Test
-    public void givenStateStateCensusCSVFile_WhenTypeIncorrect_ShouldReturnCustomException() {
-        stateCensusAnalyser = new StateCensusAnalyser();
+    public void givenStateCodeCsvFile_WhenTypeIncorrect_ShouldThrowCustomException() {
         try {
-            StateCensus.getFileExtension(new File(INCORRECT_EXTENSION_CSV_STATE_CODE));
-        } catch (StateCensusAnalyserException e) {
-            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_WRONG_FILE_TYPE, e.type);
+            File fileExtension = new File(INCORRECT_EXTENSION_CSV_STATE_CODE);
+            stateCensusAnalyser.getFileExtension(fileExtension);
+        } catch (CSVBuilderException e) {
+            Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_WRONG_FILE_TYPE, e.type);
         }
     }
-
 
     @Test
     public void givenStateCensusCodeCSVFileCorrect_WhenDelimiterIncorrect_ShouldReturnCustomException() throws IOException, CSVBuilderException {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadSateCodeCsvData(INCORRECT_IN_DELIMITER_CSV_STATE_CODE_PATH);
-        } catch (StateCensusAnalyserException e) {
-            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_INCORRECT_DELIMITER_OR_HEADER, e.type);
+        } catch (CSVBuilderException e) {
+            Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_INCORRECT_DELIMITER_OR_HEADER, e.type);
         }
     }
 
@@ -114,8 +112,8 @@ public class StateCensusAnalyserTest {
         stateCensusAnalyser = new StateCensusAnalyser();
         try {
             stateCensusAnalyser.loadSateCodeCsvData(INCORRECT_IN_HEADER_CSV_STATE_CODE_PATH);
-        } catch (StateCensusAnalyserException e) {
-            Assert.assertEquals(StateCensusAnalyserException.Exceptiontype.ENTERED_INCORRECT_DELIMITER_OR_HEADER, e.type);
+        } catch (CSVBuilderException e) {
+            Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_INCORRECT_DELIMITER_OR_HEADER, e.type);
         }
     }
 }
