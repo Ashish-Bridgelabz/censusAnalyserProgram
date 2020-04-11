@@ -150,4 +150,12 @@ public class StateCensusAnalyserTest {
         }
     }
 
+    @Test
+    public void givenStateCodeCsvFile_WhenSortedOnStateCode_ShouldReturnSortedList() throws CSVBuilderException {
+        stateCensusAnalyser.loadSateCodeCsvData(CSV_STATE_CODE_PATH);
+        String sortedStateCodeData = stateCensusAnalyser.getStateWiseSortedCodeData();
+        CSVState[] stateCodes = new Gson().fromJson(sortedStateCodeData, CSVState[].class);
+        Assert.assertEquals("AD", stateCodes[0].getStateCode());
+        Assert.assertEquals("WB", stateCodes[36].getStateCode());
+    }
 }
