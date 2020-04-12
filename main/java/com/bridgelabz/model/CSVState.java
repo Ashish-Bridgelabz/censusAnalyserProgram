@@ -2,24 +2,23 @@ package com.bridgelabz.model;
 
 import com.opencsv.bean.CsvBindByName;
 
-//For state code
-public class CSVState {
+public class CSVState extends CSVStateCensus {
     //Binding the column name in CsvBindByName Class
     @CsvBindByName(column = "SrNo")
-    public String SrNo;
+    public Integer SrNo;
     @CsvBindByName(column = "StateName")
     public String StateName;
     @CsvBindByName(column = "TIN")
-    public String TIN;
+    public Integer TIN;
     @CsvBindByName(column = "StateCode")
     public String StateCode;
 
     //Getter and setter method to encapsulate
-    public String getSrNo() {
+    public Integer getSrNo() {
         return SrNo;
     }
 
-    public void setSrNo(String srNo) {
+    public void setSrNo(Integer srNo) {
         SrNo = srNo;
     }
 
@@ -31,11 +30,11 @@ public class CSVState {
         StateName = stateName;
     }
 
-    public String getTIN() {
+    public Integer getTIN() {
         return TIN;
     }
 
-    public void setTIN(String TIN) {
+    public void setTIN(Integer TIN) {
         this.TIN = TIN;
     }
 
@@ -47,6 +46,3 @@ public class CSVState {
         StateCode = stateCode;
     }
 }
-
-
-
