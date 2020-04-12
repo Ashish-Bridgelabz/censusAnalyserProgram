@@ -39,7 +39,6 @@ public class StateCensusAnalyserTest {
             Assert.assertEquals(CSVBuilderException.Exceptiontype.ENTERED_WRONG_FILE, e.type);
         }
     }
-
     @Test
     public void givenStateCensusCsvFile_WhenTypeIncorrect_ShouldThrowCustomException() {
         try {
