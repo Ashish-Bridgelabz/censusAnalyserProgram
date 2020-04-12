@@ -1,7 +1,6 @@
 package com.bridgelabz.utility;
 
 import com.bridgelabz.exception.CSVBuilderException;
-import com.bridgelabz.model.CSVStateCensus;
 
 import java.io.Reader;
 import java.util.HashMap;
@@ -13,5 +12,6 @@ public interface ICSVBuilder {
 
     public <E> List getCSVFileList(Reader reader, Class<E> csvClass) throws CSVBuilderException;
 
-    public <E> HashMap<E, E> getCSVFileMap(Reader reader, Class csvClass) throws CSVBuilderException;
+    //public <E> HashMap<E, E> getCSVFileMap(Reader reader, Class csvClass) throws CSVBuilderException;
+
 }
