@@ -73,6 +73,7 @@ public class StateCensusAnalyserTest {
         int totalRecords = stateCensusAnalyser.loadStateCodeData(CSV_STATE_CODE_PATH);
         Assert.assertEquals(37, totalRecords);
     }
+
     @Test
     public void givenStateCodeCsvFile_WhenFileNameIncorrect_ShouldThrowCustomException() throws IOException {
         try {
@@ -168,4 +169,18 @@ public class StateCensusAnalyserTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void givenStateCensusCsvFile_WhenSortedPopulationDensity_ShouldReturnSortedList() {
+        try {
+            stateCensusAnalyser.loadStateCensusData(SIMPLE_CSV_PATH);
+            String sortedStateCensusData = stateCensusAnalyser.getStateCensusPopulationDensityWiseSortedData();
+            IndianCensusDAO[] stateCensusesCSV = new Gson().fromJson(sortedStateCensusData, IndianCensusDAO[].class);
+            Assert.assertEquals("Bihar", stateCensusesCSV[0].state);
+            Assert.assertEquals("Mizoram", stateCensusesCSV[28].state);
+        } catch (CSVBuilderException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
+
