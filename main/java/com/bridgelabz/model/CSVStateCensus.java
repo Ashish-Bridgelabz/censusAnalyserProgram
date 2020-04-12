@@ -2,15 +2,16 @@ package com.bridgelabz.model;
 
 import com.opencsv.bean.CsvBindByName;
 
+//Binding the column name in CsvBindByName Class
 public class CSVStateCensus {
     @CsvBindByName(column = "State")
     public String State;
     @CsvBindByName(column = "Population")
-    public String Population;
+    public double Population;
     @CsvBindByName(column = "AreaInSqKm")
-    public String AreaInSqKm;
+    public double AreaInSqKm;
     @CsvBindByName(column = "DensityPerSqKm")
-    public String DensityPerSqKm;
+    public double DensityPerSqKm;
 
     //Getter and setter method to encapsulate
     public String getState() {
@@ -21,27 +22,27 @@ public class CSVStateCensus {
         State = state;
     }
 
-    public String getPopulation() {
+    public double getPopulation() {
         return Population;
     }
 
-    public void setPopulation(String population) {
+    public void setPopulation(double population) {
         Population = population;
     }
 
-    public String getAreaInSqKm() {
+    public double getAreaInSqKm() {
         return AreaInSqKm;
     }
 
-    public void setAreaInSqKm(String areaInSqKm) {
+    public void setAreaInSqKm(double areaInSqKm) {
         AreaInSqKm = areaInSqKm;
     }
 
-    public String getDensityPerSqKm() {
+    public double getDensityPerSqKm() {
         return DensityPerSqKm;
     }
 
-    public void setDensityPerSqKm(String densityPerSqKm) {
+    public void setDensityPerSqKm(double densityPerSqKm) {
         DensityPerSqKm = densityPerSqKm;
     }
 }
