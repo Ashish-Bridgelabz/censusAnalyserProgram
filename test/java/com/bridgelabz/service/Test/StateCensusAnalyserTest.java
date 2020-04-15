@@ -246,4 +246,29 @@ public class StateCensusAnalyserTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void givenTheUSCensusCSVFile_WhenSortedOnPopulationDensity_ShouldReturnSortedList() {
+        try {
+            usCensusAnalyser.loadCensusData(CSV_US_CENSUS_PATH);
+            String sortedStatePopulationData = usCensusAnalyser.getSortedCensusData(CensusAnalyser.SortingMode.DENSITY);
+            USCensus[] censusCSV = new Gson().fromJson(sortedStatePopulationData, USCensus[].class);
+            Assert.assertEquals("District of Columbia", censusCSV[0].state);
+            Assert.assertEquals("Alaska", censusCSV[50].state);
+        } catch (CSVBuilderException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void givenTheUSCensusCSVFile_WhenSortedImproperOnPopulationDensity_ShouldReturnSortedList() {
+        try {
+            usCensusAnalyser.loadCensusData(CSV_US_CENSUS_PATH);
+            String sortedStatePopulationData = usCensusAnalyser.getSortedCensusData(CensusAnalyser.SortingMode.DENSITY);
+            USCensus[] censusCSV = new Gson().fromJson(sortedStatePopulationData, USCensus[].class);
+            Assert.assertNotEquals("Alabama", censusCSV[14].state);
+            Assert.assertNotEquals("Wyoming", censusCSV[50].state);
+        } catch (CSVBuilderException e) {
+            e.printStackTrace();
+        }
+    }
 }
